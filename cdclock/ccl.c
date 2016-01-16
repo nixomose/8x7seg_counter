@@ -7,14 +7,6 @@
  * you kick the latch to present it.
  */
 
-// array to activate particular digit on the 8x7segment module
-// it is the common anode of 7 segment
-//int anode[] =
-//  { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
-
-// array for decimal number, it is the cathode, please refer to the datasheet.
-// therefore a logic low will activate the particular segment
-// PGFEDCBA, segment on 7 segment, P is the dot
 
 #define b10000000 0x80
 #define b01000000 0x40
@@ -50,10 +42,6 @@ int anode[] =
       b00000001 // digit 8 from right
     };
 
-// array for decimal number, it is the cathode, please refer to the datasheet.
-// therefore a logic low will activate the particular segment
-// PGFEDCBA, segment on 7 segment, P is the dot
-
 int cathode[] =
   {
   b11000000, // 0
@@ -70,8 +58,6 @@ int cathode[] =
       b11111111  // blank
     };
 
-//int cathode[] =
-//  { 0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x67 };
 
 int LATCH = 4; // RCK of 8x7segment module pin 16
 
@@ -86,7 +72,6 @@ typedef int boolean;
 
 void init(void)
   {
-
     wiringPiSetup();
     pinMode(LATCH, OUTPUT);
     pinMode(CLOCK, OUTPUT);
@@ -161,20 +146,6 @@ void go()
             delay(1);
           }
       }
-  }
-
-int invert(int v)
-  {
-    int lp;
-    int out = 0;
-    for (lp = 0; lp < 8; lp++)
-      {
-        int b = v % 2;
-        v = v / 2;
-        out *= 2;
-        out += b;
-      }
-    return out;
   }
 
 int main(int num, char *opts[])
